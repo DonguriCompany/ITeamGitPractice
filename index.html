@@ -4,14 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GitHub Pages テスト</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>こんにちは、GitHub Pages！</h1>
-  <p>これはテンプレートHTMLです。</p>
+  <h1>ITeam Git Practiceへようこそ！</h1>
+  <p>みんなで作り上げて行きましょう。</p>
 
-  <button onclick="sayHello()">クリックして挨拶</button>
+  <h1>みんなの趣味と悩み</h1>
+  <div id="content">読み込み中...</div>
 
-  <script src="script.js"></script>
+  <script>
+    const users = ['hidaka', 'higuchi', 'kobashi','nakamura','oku','ryota','sato','shoji','suzuki']; // ← ここに人のフォルダ名を追加
+    const container = document.getElementById('content');
+
+    async function loadText(url) {
+      const res = await fetch(url);
+      if (!res.ok) return '読み込めませんでした';
+      return await res.text();
+    }
+
+    async function renderAll() {
+      container.innerHTML = '';
+      for (const user of users) {
+        const syumi = await loadText(`everyone/${user}/syumi.txt`);
+        const nayami = await loadText(`everyone/${user}/nayami.txt`);
+        
+        const div = document.createElement('div');
+        div.className = 'person';
+        div.innerHTML = `
+          <h2>${user} さん</h2>
+          <h3>趣味</h3>
+          <pre>${syumi}</pre>
+          <h3>悩み</h3>
+          <pre>${nayami}</pre>
+        `;
+        container.appendChild(div);
+      }
+    }
+
+    renderAll();
+  </script>
 </body>
 </html>

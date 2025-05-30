@@ -17,6 +17,33 @@ h1 {
   gap: 1.5rem;
 }
 
+/* ===== ボタン全体の共通スタイル ===== */
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin: 0.5rem;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* 戻るボタンを下に配置・中央寄せ */
+button.back-button {
+  display: block;
+  margin: 2rem auto 0 auto;
+}
+
 /* 各人物カード */
 .person {
   background: white;
@@ -41,4 +68,23 @@ pre {
   background-color: #f3f3f3;
   padding: 0.5rem;
   border-radius: 8px;
+}
+
+
+/* ===== index.html のユーザーリスト（中央揃え＆ラップ）===== */
+#userList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* ===== detail.html の中央レイアウト ===== */
+#content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#title {
+  text-align: center;
 }

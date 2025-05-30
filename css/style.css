@@ -10,6 +10,10 @@ h1 {
   margin-bottom: 2rem;
 }
 
+#content {
+   text-align: center;
+}
+
 /* 趣味と悩み表示エリアのグリッド */
 #content {
   display: grid;

@@ -10,40 +10,23 @@
   <h1>ITeam Git Practiceへようこそ！</h1>
   <p>みんなで作り上げて行きましょう。</p>
 
-  <h1>みんなの趣味と悩み</h1>
-  <div id="content">読み込み中...</div>
+  <h2>メンバー一覧</h2>
+  <div id="userList">読み込み中...</div>
 
   <button onclick="location.href='gogo.html'">gogo</button>
   <script>
-    const users = ['hidaka', 'higuchi', 'kobashi','nakamura','oku','ryota','sato','shoji','suzuki']; // ← ここに人のフォルダ名を追加
-    const container = document.getElementById('content');
+    const users = ['hidaka', 'higuchi', 'kobashi','nakamura','oku','ryota','sato','shoji','suzuki'];
+    const userList = document.getElementById('userList');
+    userList.innerHTML = '';
 
-    async function loadText(url) {
-      const res = await fetch(url);
-      if (!res.ok) return '読み込めませんでした';
-      return await res.text();
+    for (const user of users) {
+      const button = document.createElement('button');
+      button.textContent = `${user} さんのページへ`;
+      button.onclick = () => {
+        location.href = `detail.html?user=${user}`;
+      };
+      userList.appendChild(button);
     }
-
-    async function renderAll() {
-      container.innerHTML = '';
-      for (const user of users) {
-        const syumi = await loadText(`everyone/${user}/syumi.txt`);
-        const nayami = await loadText(`everyone/${user}/nayami.txt`);
-        
-        const div = document.createElement('div');
-        div.className = 'person';
-        div.innerHTML = `
-          <h2>${user} さん</h2>
-          <h3>趣味</h3>
-          <pre>${syumi}</pre>
-          <h3>悩み</h3>
-          <pre>${nayami}</pre>
-        `;
-        container.appendChild(div);
-      }
-    }
-
-    renderAll();
   </script>
 </body>
 </html>

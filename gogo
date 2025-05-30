@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>gogoJuggler3</title>
+</head>
+<body>
+あいうえお
+<button onclick="location.href='index.html'">戻る</button>
+</body>
+</html>

@@ -1,0 +1,82 @@
+🔧 ブランチ操作
+コマンド	説明
+git branch	ブランチ一覧を表示
+git branch <branch-name>	新しいブランチを作成
+git checkout <branch-name>	既存ブランチに切り替え
+git checkout -b <branch-name>	新しいブランチを作成＆切り替え
+git branch -d <branch-name>	ローカルのブランチ削除（マージ済のみ）
+git branch -D <branch-name>	ローカルのブランチ強制削除
+git push origin --delete <branch-name>	リモートブランチ削除
+
+💾 コミット関連
+コマンド	説明
+git status	変更点を確認
+git add <file>	ファイルをステージに追加
+git add .	全ての変更ファイルをステージに追加
+git commit -m "メッセージ"	コミットを作成
+git commit --amend	直前のコミットを修正
+git log	コミット履歴表示
+git log --oneline	簡易ログ表示
+
+🔁 マージ & リベース
+コマンド	説明
+git merge <branch>	他のブランチを現在のブランチに統合
+git rebase <branch>	現在のブランチのベースを変更
+git merge --abort	マージの中断
+git rebase --abort	リベースの中断
+git rebase --continue	コンフリクト解消後、リベース続行
+
+☁️ リモート操作
+コマンド	説明
+git remote -v	登録されたリモート確認
+git remote add origin <url>	リモートを追加
+git fetch	リモートの変更を取得
+git pull	リモートの変更を取得してマージ
+git push	ローカルの変更をリモートに送信
+git push -u origin <branch>	ブランチを新規作成してpush（上流設定付き）
+
+🧹 クリーンアップ・その他
+コマンド	説明
+git stash	作業中の変更を一時退避
+git stash pop	一時退避した変更を元に戻す
+git reset --hard	変更をすべて取り消す（注意）
+git clean -fd	Git管理外のファイル・ディレクトリを削除
+git diff	変更内容を表示
+git show <commit>	特定のコミット内容を表示
+
+-------------------------------------------------------------------
+
+🧠 Git現場TIPS付き・よく使うコマンド集
+✅ コミット関連の便利ワザ
+コマンド	説明	Tips
+git commit --amend	最後のコミットを上書き修正	メッセージやファイルの追加忘れを直す時に便利（ただしpush前のみ推奨）
+git reset --soft HEAD~1	コミットを取り消して、変更は残す	「コミットしちゃったけど、やっぱ修正したい」時用
+git reset --hard HEAD~1	コミット＆変更を完全に取り消す	慎重に使う！（復元できないことも）
+git cherry-pick <commit-hash>	別ブランチの特定のコミットを取り込む	「バグ修正だけmainに持ってきたい」など、ピンポイント移植に便利
+
+🔀 ブランチ・マージ運用
+コマンド	説明	Tips
+git rebase -i HEAD~3	直近3コミットをインタラクティブ編集	複数コミットを1つにまとめる（squash）などで使う
+git merge --no-ff <branch>	マージコミットを強制作成	ブランチの履歴を明確に残したいときに有効
+git switch <branch>	ブランチの切り替え（checkoutの新形式）	checkoutよりもシンプルで覚えやすい
+
+🚨 コンフリクトや履歴調査
+コマンド	説明	Tips
+git log --graph --oneline --all	視覚的に履歴確認	マージ・分岐の構造を一目で確認できて便利
+git blame <file>	誰がいつ書いたか確認	調査・レビュー・責任追跡に有効（ただし責めるためには使わないで）
+git diff <branch1>..<branch2>	ブランチ間の差分表示	レビュー前に「何が変わったか」ざっと見るときに便利
+
+🔧 リモート管理やクリーンアップ
+コマンド	説明	Tips
+git push origin --delete <branch>	リモートブランチ削除	統合済みのブランチは消しておくと管理が楽
+git fetch -p	削除されたリモートブランチをローカルからも削除	-pは--prune（不要な追跡ブランチを掃除）
+git stash -u	変更＋未追跡ファイルも一時退避	急に別作業する時に便利。あとからstash popで戻せる
+
+💡 現場TIPSまとめ（口頭でよく言うやつ）
+シチュエーション	TIPS
+作業ブランチで最新mainに追従したい	git fetch origin → git rebase origin/main
+他の人のブランチを試したい	git fetch origin <branch> → git switch -c test origin/<branch>
+複数コミットを1つにまとめたい	git rebase -iでsquash
+コミットを抜き出して別ブランチに移したい	cherry-pick使う
+誤pushしたくない！	git push --dry-runで事前確認
+一時作業だけどコミットしたくない	git stash（特に急な仕様変更対応時など）

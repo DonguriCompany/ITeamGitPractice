@@ -29,15 +29,18 @@
       const syumi = await loadText(`everyone/${user}/syumi.txt`);
       const nayami = await loadText(`everyone/${user}/nayami.txt`);
       const tokugi = await loadText(`everyone/${user}/tokugi.txt`);
+      const hitokoto = await loadText(`everyone/${user}/hitokoto.txt`);
 
       const content = document.getElementById('content');
       content.innerHTML = `
         <h3>趣味</h3>
         <pre>${syumi}</pre><br>
         <h3>悩み</h3>
-        <pre>${nayami}</pre>
+        <pre>${nayami}</pre><br>
         <h3>特技</h3>
-        <pre>${nayami}</pre>
+        <pre>${tokugi}</pre><br>
+        <h3>一言</h3>
+        <pre>${hitokoto}</pre>
       `;
     }
 
